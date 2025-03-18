@@ -1,4 +1,5 @@
 package com.muhammetakduman.javafx.database;
 
-public class errorhandle {
+public class SingletonDbConnection {
+
 }

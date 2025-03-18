@@ -8,6 +8,8 @@ module com.muhammetakduman.javafx {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
+    requires static lombok;
+    requires java.sql;
     //requires eu.hansolo.tilesfx;
 
     opens com.muhammetakduman.javafx to javafx.fxml;
