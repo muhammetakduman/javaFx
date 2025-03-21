@@ -1,5 +1,7 @@
 package com.muhammetakduman.javafx.dao;
 
+import com.muhammetakduman.javafx.database.SingletonDbConnection;
+
 import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +15,7 @@ public interface IDaoImplements<T> {
     Optional<T> delete(int id);
 
     default Connection iDaoImplementsDbConnection() {
-        return null;
+        return SingletonDbConnection.getInstance().getConnection();
     }
 
 }
