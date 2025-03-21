@@ -10,12 +10,13 @@ module com.muhammetakduman.javafx {
     requires org.kordamp.bootstrapfx.core;
     requires static lombok;
     requires java.sql;
+    requires org.apache.poi.poi;
     //requires eu.hansolo.tilesfx;
 
     opens com.muhammetakduman.javafx to javafx.fxml;
     //opens com.muhammetakduman.javafx.controller to javafx.fxml;
-    //opens com.muhammetakduman.javafx.dto to java.base,lombok;
-    //opens com.muhammetakduman.javafx.dao to java.sql;
+    opens com.muhammetakduman.javafx.dto to java.base,lombok;
+    opens com.muhammetakduman.javafx.dao to java.sql;
 
     exports com.muhammetakduman.javafx;
     exports com.muhammetakduman.javafx.dao;

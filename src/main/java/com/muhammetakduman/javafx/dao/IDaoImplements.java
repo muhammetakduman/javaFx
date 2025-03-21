@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface IDaoImplements<T> {
     Optional<T> create(T entity);
-    List<T> list();
+    Optional<List<T>> list();
     Optional<T> findByName(String name);
     Optional<T> findById (int id);
     Optional<T> update(int id, T entity);
