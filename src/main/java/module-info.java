@@ -3,10 +3,16 @@ module com.muhammetakduman.javafx {
     requires javafx.fxml;
     //requires javafx.web;
 
+    // UI geliştirme için kullanılan harici kütüphaneler
+    // ControlsFX, gelişmiş UI bileşenlerini (örn: Notifikasyonlar, Doğrulama Alanları) sağlar.
     requires org.controlsfx.controls;
+    // FormsFX, formlar için gelişmiş bileşenler sunan bir kütüphanedir.
     requires com.dlsc.formsfx;
+    // ValidatorFX, form doğrulama işlemleri için kullanılır.
     requires net.synedra.validatorfx;
+    // İkon kütüphanesi, UI'de çeşitli ikonları kullanmaya olanak tanır.
     requires org.kordamp.ikonli.javafx;
+    // BootstrapFX, Bootstrap benzeri CSS stillerini JavaFX'e entegre eder.
     requires org.kordamp.bootstrapfx.core;
     requires static lombok;
     requires java.sql;
@@ -16,7 +22,7 @@ module com.muhammetakduman.javafx {
     //requires eu.hansolo.tilesfx;
 
     opens com.muhammetakduman.javafx to javafx.fxml;
-    //opens com.muhammetakduman.javafx.controller to javafx.fxml;
+    opens com.muhammetakduman.javafx.controller to javafx.fxml;
     opens com.muhammetakduman.javafx.dto to java.base,lombok;
     opens com.muhammetakduman.javafx.dao to java.sql;
 
