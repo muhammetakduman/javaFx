@@ -12,6 +12,7 @@ module com.muhammetakduman.javafx {
     requires java.sql;
     requires org.apache.poi.poi;
     requires org.apache.xmlbeans;
+    requires org.apache.logging.log4j;
     //requires eu.hansolo.tilesfx;
 
     opens com.muhammetakduman.javafx to javafx.fxml;
