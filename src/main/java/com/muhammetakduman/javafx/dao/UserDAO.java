@@ -24,10 +24,7 @@ public class UserDAO implements IDaoImplements<UserDTO> {
 
     }
 
-
     //field
-
-
 
 
 
@@ -87,21 +84,87 @@ public class UserDAO implements IDaoImplements<UserDTO> {
 
     @Override
     public Optional<UserDTO> findByName(String name) {
+        String sql = "SELECT * FROM users WHERE username =?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1,name);
+            ResultSet resultSet = preparedStatement.executeQuery(sql);
+            //db gelen veri varsa
+            if (resultSet.next()){
+                UserDTO userDTO = UserDTO.builder()
+                        .id(resultSet.getInt("id"))
+                        .username(resultSet.getString("username"))
+                        .email(resultSet.getString("email"))
+                        .password(resultSet.getString("passwrod"))
+                        .build();
+                return Optional.of(userDTO);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //eğer bulunmazsa boş dön
         return Optional.empty();
     }
 
     @Override
     public Optional<UserDTO> findById(int id) {
+        String sql = "SELECT * FROM users WHERE id=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery(sql);
+            //db gelen veri varsa
+            if (resultSet.next()){
+                UserDTO userDTO = UserDTO.builder()
+                        .id(resultSet.getInt("id"))
+                        .username(resultSet.getString("username"))
+                        .email(resultSet.getString("email"))
+                        .password(resultSet.getString("passwrod"))
+                        .build();
+                return Optional.of(userDTO);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //eğer bulunmazsa boş dön
+        System.out.println(id +" id'li kullancılı bulunmadı");
         return Optional.empty();
     }
 
     @Override
-    public Optional<UserDTO> update(int id, UserDTO entity) {
+    public Optional<UserDTO> update(int id, UserDTO userDTO) {
+        String sql = "UPDATE users SET username=? ,password=?,email=? WHERE id=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1, userDTO.getUsername());
+            preparedStatement.setString(2, userDTO.getPassword());
+            preparedStatement.setString(3,userDTO.getEmail());
+            preparedStatement.setInt(4,userDTO.getId());
+
+            int affecttedRows = preparedStatement.executeUpdate();
+            //id değişmesin
+            if (affecttedRows>0){
+                userDTO.setId(id);
+                return Optional.of(userDTO);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
 
     @Override
     public Optional<UserDTO> delete(int id) {
+        Optional<UserDTO> optionalDelete = findById(id);
+        if (optionalDelete.isPresent()){
+            String sql = "DELETE FROM users WHERE id=?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+                preparedStatement.setInt(1,id);
+                int affectedRows = preparedStatement.executeUpdate();
+                if (affectedRows>0){
+                    return optionalDelete;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
         return Optional.empty();
     }
 }

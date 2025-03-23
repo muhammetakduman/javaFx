@@ -11,7 +11,7 @@ public interface IDaoImplements<T> {
     Optional<List<T>> list();
     Optional<T> findByName(String name);
     Optional<T> findById (int id);
-    Optional<T> update(int id, T entity);
+    Optional<T> update(int id, T t);
     Optional<T> delete(int id);
 
     default Connection iDaoImplementsDbConnection() {
