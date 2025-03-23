@@ -11,6 +11,7 @@ module com.muhammetakduman.javafx {
     requires static lombok;
     requires java.sql;
     requires org.apache.poi.poi;
+    requires org.apache.xmlbeans;
     //requires eu.hansolo.tilesfx;
 
     opens com.muhammetakduman.javafx to javafx.fxml;

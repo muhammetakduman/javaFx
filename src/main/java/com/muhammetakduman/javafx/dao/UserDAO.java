@@ -2,7 +2,6 @@ package com.muhammetakduman.javafx.dao;
 
 import com.muhammetakduman.javafx.database.SingletonDbConnection;
 import com.muhammetakduman.javafx.dto.UserDTO;
-import org.apache.poi.sl.draw.geom.GuideIf;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +12,33 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDAO implements IDaoImplements<UserDTO> {
+
+    @Override
+    public  UserDTO mapToObjectDTO(ResultSet resultSet) throws SQLException {
+        return UserDTO.builder()
+                .id(resultSet.getInt("id"))
+                .username(resultSet.getString("username"))
+                .password(resultSet.getString("password"))
+                .email(resultSet.getString("email"))
+                .build();
+    }
+
+    @Override
+    public Optional<UserDTO> selectSingle(String sql, Object... params) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            for (int i = 0; i < params.length; i++) {
+                preparedStatement.setObject((i+1),params[i]);
+            }
+            try (ResultSet resultSet = preparedStatement.executeQuery()){
+                if (resultSet.next()){
+                    return Optional.of(mapToObjectDTO(resultSet));
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
 
     //Injection
     private Connection connection;
@@ -84,49 +110,15 @@ public class UserDAO implements IDaoImplements<UserDTO> {
 
     @Override
     public Optional<UserDTO> findByName(String name) {
-        String sql = "SELECT * FROM users WHERE username =?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-            preparedStatement.setString(1,name);
-            ResultSet resultSet = preparedStatement.executeQuery(sql);
-            //db gelen veri varsa
-            if (resultSet.next()){
-                UserDTO userDTO = UserDTO.builder()
-                        .id(resultSet.getInt("id"))
-                        .username(resultSet.getString("username"))
-                        .email(resultSet.getString("email"))
-                        .password(resultSet.getString("passwrod"))
-                        .build();
-                return Optional.of(userDTO);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        //eğer bulunmazsa boş dön
-        return Optional.empty();
+        //String sql = "SELECT * FROM users WHERE username =?";
+        String sql = "SELECT * FROM users WHERE email=?";
+        return selectSingle(sql,name);
     }
 
     @Override
     public Optional<UserDTO> findById(int id) {
         String sql = "SELECT * FROM users WHERE id=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-            preparedStatement.setInt(1,id);
-            ResultSet resultSet = preparedStatement.executeQuery(sql);
-            //db gelen veri varsa
-            if (resultSet.next()){
-                UserDTO userDTO = UserDTO.builder()
-                        .id(resultSet.getInt("id"))
-                        .username(resultSet.getString("username"))
-                        .email(resultSet.getString("email"))
-                        .password(resultSet.getString("passwrod"))
-                        .build();
-                return Optional.of(userDTO);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        //eğer bulunmazsa boş dön
-        System.out.println(id +" id'li kullancılı bulunmadı");
-        return Optional.empty();
+        return selectSingle(sql,id);
     }
 
     @Override
@@ -136,7 +128,7 @@ public class UserDAO implements IDaoImplements<UserDTO> {
             preparedStatement.setString(1, userDTO.getUsername());
             preparedStatement.setString(2, userDTO.getPassword());
             preparedStatement.setString(3,userDTO.getEmail());
-            preparedStatement.setInt(4,userDTO.getId());
+            preparedStatement.setInt(4,id);
 
             int affecttedRows = preparedStatement.executeUpdate();
             //id değişmesin
