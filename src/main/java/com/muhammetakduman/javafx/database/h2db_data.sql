@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users(
 
 -- Insert
 
-MERGE INTO  users(id,username,password,email) KEY(id) VALUES (1,'Muhammet','123456','akdumanmuhammet34@gmail.com')
+MERGE INTO  users(id,username,password,email) KEY(id) VALUES (1,'muhammet','123456','akdumanmuhammet34@gmail.com')
 
 --select
 
@@ -20,7 +20,7 @@ select * FROM users;
 
 --find user
 
-SELECT * FROM users WHERE username = "Hamit"  AND "123456";
+SELECT * FROM users WHERE username = "muhammet"  AND "123456";
 
 --update
 

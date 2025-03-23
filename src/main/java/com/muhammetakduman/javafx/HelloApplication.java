@@ -78,7 +78,7 @@ public class HelloApplication extends Application {
 
             String insertDataSQL = """
                  MERGE INTO users (id, username, password, email)
-                 KEY(id) VALUES (1, 'MuhammetAkduman', 'root', 'akdumanmuhammet34@gmail.com');
+                 KEY(id) VALUES (1, 'muhammetakduman', 'root', 'akdumanmuhammet34@gmail.com');
                  """;
             stmt.execute(insertDataSQL);
 

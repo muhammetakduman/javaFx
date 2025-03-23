@@ -24,7 +24,7 @@ public class LoginController  {
 
     //Parametresz constructor
 
-    private LoginController(){
+    public LoginController(){
         userDAO = new UserDAO();
 
     }
