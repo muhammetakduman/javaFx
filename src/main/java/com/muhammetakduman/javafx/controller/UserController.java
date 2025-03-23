@@ -23,18 +23,6 @@ public class UserController  implements IDaoImplements<UserDTO> {
         return Optional.empty();
     }
 
-    // GENERICS METOTO (LIST,FIND)
-    // ResultSet'ten UserDTO oluşturmayı tek bir yardımcı metot
-    // ResultSetten UserDTO oluştur
-    @Override
-    public UserDTO mapToObjectDTO(ResultSet resultSet) throws SQLException {
-        return null;
-    }
-
-    @Override
-    public Optional<UserDTO> selectSingle(String sql, Object... params) {
-        return Optional.empty();
-    }
     //findByName
     @Override
     public Optional<UserDTO> findByName(String name) {
