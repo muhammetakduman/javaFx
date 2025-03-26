@@ -58,9 +58,9 @@ public class LoginController  {
         password = passwordField.getText();
 
         //userDTO
-        Optional<UserDTO> optionalUserDTO = userDAO.loginUser(username,password);
-        if (optionalUserDTO.isPresent()){
-            UserDTO userDTO = optionalUserDTO.get();
+        Optional<UserDTO> optionalLoginUserDTO = userDAO.loginUser(username,password);
+        if (optionalLoginUserDTO.isPresent()){
+            UserDTO userDTO = optionalLoginUserDTO.get();
             showAlert("Başarılı","Giriş başarılı", Alert.AlertType.CONFIRMATION);
             ///redirect admin site
         openAdminPanel();
