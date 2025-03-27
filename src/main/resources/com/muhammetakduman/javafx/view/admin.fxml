@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+
+<?import javafx.scene.control.TextField?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.muhammetakduman.javafx.controller.AdminController">
+    <children>
+        <VBox spacing="10" layoutX="10" layoutY="10" style="-fx-padding: 1;" stylesheets="@css/styles.css">
+
+            <!-- Arama ve filtreleme alanı -->
+            <HBox spacing="10">
+                <TextField fx:id="searchField" promptText="Ara (ad, e-posta, rol)"/>
+                <ComboBox fx:id="filterRoleComboBox" promptText="Rol Filtrele"/>
+                <Button text="Filtreyi Temizle" onAction="#clearFilters"/>
+            </HBox>
+
+            <!-- Kullanıcıları listeleyen tablo -->
+            <TableView fx:id="userTable">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID"/>
+                    <TableColumn fx:id="usernameColumn" text="Kullanıcı Adı"/>
+                    <TableColumn fx:id="emailColumn" text="Email Adres"/>
+                    <TableColumn fx:id="passwordColumn" text="Şifre"/>
+                    <TableColumn fx:id="roleColumn" text="Rol"/>
+                </columns>
+            </TableView>
+
+            <!--// Sayfa açılır açılmaz geliyor-->
+            <!-- Admin'in kullanıcıya rol ataması yapabileceği ComboBox -->
+            <!--
+            <HBox spacing="10">
+                <ComboBox fx:id="roleComboBox" prefWidth="200"/>
+            </HBox>
+             -->
+
+            <!-- Kullanıcı işlemleri için butonlar -->
+            <HBox spacing="10">
+                <Button text="Kullanıcı Ekle" onAction="#addUser"/>
+                <Button text="Kullanıcı Güncelle" onAction="#updateUser"/>
+                <Button text="Kullanıcı Sil" onAction="#deleteUser"/>
+            </HBox>
+
+            <!-- Oturum kapatma -->
+            <HBox spacing="10">
+                <Button text="Tabloyu Yenile" onAction="#refreshTable"/>
+                <Button text="Çıkış Yap" onAction="#logout"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <Button text="🖨️ Yazdır" onAction="#printTable"/>
+                <Button text="🧮 Hesap Makinesi" onAction="#openCalculator"/>
+                <Button text="🧾 KDV Hesapla" onAction="#openKdvCalculator"/>
+            </HBox>
+
+
+        </VBox>
+    </children>
+</AnchorPane>
