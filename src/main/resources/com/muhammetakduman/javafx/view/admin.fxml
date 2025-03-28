@@ -58,6 +58,12 @@
                 <Button text="🧾 KDV Hesapla" onAction="#openKdvCalculator"/>
             </HBox>
 
+            <HBox spacing="10">
+                <Button text="🖨️ Yazdır" onAction="#printTable"/>
+                <Button text="🧮 Hesap Makinesi" onAction="#openCalculator"/>
+                <Button text="🧾 KDV Hesapla" onAction="#openKdvCalculator"/>
+            </HBox>
+
 
         </VBox>
     </children>
