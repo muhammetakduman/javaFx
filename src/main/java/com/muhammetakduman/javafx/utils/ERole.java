@@ -1,9 +1,9 @@
-package com.muhammetakduman.javafx.dto;
+package com.muhammetakduman.javafx.utils;
 
 public enum ERole {
-    STUDENT("ÖĞRENCİ"),
-    TEACHER("öĞRETMEN"),
-    ADMIN("YÖNETİCİ");
+    USER("Kullanıcı"),
+    MODERATOR("Moderatör"),
+    ADMIN("Yönetici");
 
     private final String description;
 

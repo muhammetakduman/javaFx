@@ -19,6 +19,7 @@ module com.muhammetakduman.javafx {
     requires org.apache.poi.poi;
     requires org.apache.xmlbeans;
     requires org.apache.logging.log4j;
+    requires jbcrypt;
     //requires eu.hansolo.tilesfx;
 
     opens com.muhammetakduman.javafx to javafx.fxml;
@@ -30,5 +31,7 @@ module com.muhammetakduman.javafx {
     exports com.muhammetakduman.javafx.dao;
     exports com.muhammetakduman.javafx.database;
     exports com.muhammetakduman.javafx.dto;
+    exports com.muhammetakduman.javafx.utils;
+    opens com.muhammetakduman.javafx.utils to java.base, lombok;
 
 }
